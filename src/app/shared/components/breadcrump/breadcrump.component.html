@@ -1,0 +1,5 @@
+<div class="container-breadcrumb" *ngIf="paths?.length">
+  <ul class="breadcrumb">
+      <li *ngFor="let path of paths"><a [routerLink]="path.url" [class.font-bold]="path.isStrong">{{path.name}}</a></li>
+  </ul>
+</div>

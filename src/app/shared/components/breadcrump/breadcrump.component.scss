@@ -1,0 +1,29 @@
+.container-breadcrumb{
+  background-color: var(--light-gray-secundary);
+  border-bottom: 1px solid var(--light-gray);
+  padding-left: 5%;
+}
+
+ul.breadcrumb {
+  margin:0px;
+  padding:14px;
+  list-style: none;    
+}
+
+ul.breadcrumb li {
+  display: inline;
+  font-size: 18px;
+}
+
+ul.breadcrumb li+li:before {
+  padding: 8px;
+  color: black;
+  font-family: 'Material Icons', sans-serif;
+  content: "arrow_forward_ios";
+  font-size: 12px;
+}
+
+ul.breadcrumb li a {
+  color: black;
+  text-decoration: none;
+}

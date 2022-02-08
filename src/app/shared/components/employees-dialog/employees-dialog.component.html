@@ -1,0 +1,37 @@
+<h1 mat-dialog-title alig="center">{{data?.employe? 'Editar Empleado' : 'Nuevo Empleado'}}</h1>
+<div mat-dialog-content fxLayout="column" [formGroup]="form">
+  <mat-form-field fxFlex="100" appearance="outline">
+    <mat-label>Nombres</mat-label>
+    <input matInput id="firstName" formControlName="firstName" placeholder="Ingrese nombre">    
+    <mat-icon *ngIf="this.form.get('firstName')?.getError('required')" matSuffix class="icon-danger">cancel</mat-icon>
+  </mat-form-field>
+
+  <mat-form-field fxFlex="100" appearance="outline">
+    <mat-label>Apellidos</mat-label>
+    <input matInput formControlName="lastName" placeholder="Ingrese Apellidos">
+    <mat-icon *ngIf="this.form.get('lastName')?.getError('required')" matSuffix class="icon-danger">cancel</mat-icon>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Seleccione cargo</mat-label>
+    <mat-select formControlName="job">
+      <mat-option *ngFor="let element of positions" [value]="element">
+        {{element}}
+      </mat-option>
+    </mat-select>
+    <mat-progress-bar *ngIf="flagLoading" mode="indeterminate"></mat-progress-bar>
+    <mat-icon *ngIf="this.form.get('job')?.getError('required')" matSuffix class="icon-danger">cancel</mat-icon>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Fecha de nacimiento</mat-label>
+    <input readonly="true" formControlName="birthDate" matInput [matDatepicker]="picker">
+    <mat-datepicker-toggle matPrefix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+    <mat-icon *ngIf="this.form.get('birthDate')?.getError('required')" matSuffix class="icon-danger">cancel</mat-icon>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions fxLayout="row" fxLayoutAlign="center center">  
+  <button mat-button [mat-dialog-close]="null">Cancelar</button>
+  <button mat-raised-button [disabled]="!form.valid || !positions?.length" color="primary" [mat-dialog-close]="{ action: data.action , employe: form.value , index: data.index}">Aceptar</button>
+</div>

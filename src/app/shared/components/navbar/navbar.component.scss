@@ -1,0 +1,42 @@
+.container-navbar {
+  border-bottom: 1px solid var(--light-gray);
+  height: 100px;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  background-color: white;
+  z-index: 1;
+
+  a {
+    margin-left: 5%;
+  }
+
+  img {
+    border-radius: 50%;
+    border: 2px solid black;
+    height: 80px;
+    width: 80px;
+    cursor: pointer;
+
+    &:hover {
+      box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+    }
+
+    &:active {
+      cursor: progress;
+    }
+  }
+
+  .title {
+    font-weight: bold;
+    font-size: 25px;
+  }
+
+  .sub-title {
+    margin-top: 5px;
+    font-weight: bold;
+    font-size: 20px;
+    color: var(--color-primary);
+  }
+}

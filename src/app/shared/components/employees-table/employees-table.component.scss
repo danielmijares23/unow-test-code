@@ -1,0 +1,29 @@
+.table-responsive {
+  display: block;
+  width: 100%;
+  overflow-x: auto;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+
+  table {
+    width: 100%;
+  }
+  
+  table th {
+    background-color: var(--light-gray-table);
+  }
+  
+  .mat-row:nth-child(even) {
+    background-color: var(--light-gray-table);
+  }
+  
+  .not-register{
+    padding:10px;
+    text-align: center !important;
+    color: gray;
+    font-weight: bold;
+  }
+
+  .gray-color{
+    color:gray !important;
+  }
+}

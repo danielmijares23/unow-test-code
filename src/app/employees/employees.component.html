@@ -1,0 +1,20 @@
+<!-- Breadcrump -->
+<app-breadcrump [paths]="paths"></app-breadcrump>
+<!-- #END Breadcrump -->
+
+<!-- Main -->
+<div class="container-employees" fxLayout="column" fxLayoutAlign="center">
+   <div class="employees-header">
+      <app-search-section
+      (sendSearch)="getSearch($event)">
+   </app-search-section>
+   </div>
+   <div class="employees-container">
+      <app-employees-table 
+      [resource]="employees"
+      [search]="search"
+      (sendActionsEvent)="getActionsEvent($event)">
+      </app-employees-table>
+   </div>
+</div>
+<!-- #END Main -->
