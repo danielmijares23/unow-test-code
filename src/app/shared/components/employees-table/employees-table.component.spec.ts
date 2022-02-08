@@ -43,4 +43,12 @@ describe('EmployeesTableComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  describe('eventEmployees test suite', () => {
+    it('should call method eventEmployees correctly', () => {
+      spyOn(component.sendActionsEvent,'emit').and.callThrough();
+      component.eventEmployees({action:'add'});
+      expect(component.sendActionsEvent.emit).toHaveBeenCalled();
+    });
+  });
 });

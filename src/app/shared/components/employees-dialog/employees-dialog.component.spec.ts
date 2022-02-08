@@ -22,6 +22,7 @@ describe('EmployeesDialogComponent', () => {
   let component: EmployeesDialogComponent;
   let fixture: ComponentFixture<EmployeesDialogComponent>;
   let employeesService: EmployeesService;
+  let toastrService: ToastrService;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -74,6 +75,7 @@ describe('EmployeesDialogComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(EmployeesDialogComponent);
     employeesService = TestBed.inject(EmployeesService);
+    toastrService = TestBed.inject(ToastrService);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
@@ -82,10 +84,20 @@ describe('EmployeesDialogComponent', () => {
     expect(component).toBeTruthy();
   });
 
+  describe('ngOnInit method test suite',()=>{
+    it('should call method getPositions correctly',()=>{
+      spyOn(component,'getPositions').and.callThrough();
+      component.ngOnInit();
+      expect(component.getPositions).toHaveBeenCalled();
+    });
+  });
+
   describe('getPositions test suite', () => {
     it('should call method getPositions catch error', inject([EmployeesService], () => {
+      // spyOn(toastrService, 'error').and.callThrough();
       spyOn(employeesService, 'getEmployeesPositions').and.returnValue(Promise.reject('cant load position list'));
-      component.getPositions();      
+      component.getPositions();  
+      // expect(toastrService.error).toHaveBeenCalled();    
     }));
   });
 });
