@@ -17,6 +17,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { ToastrService } from 'ngx-toastr';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { EmployeesService } from './../../services/employees/employees.service';
+import { of } from 'rxjs';
 
 describe('EmployeesDialogComponent', () => {
   let component: EmployeesDialogComponent;
@@ -84,20 +85,36 @@ describe('EmployeesDialogComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  describe('ngOnInit method test suite',()=>{
-    it('should call method getPositions correctly',()=>{
-      spyOn(component,'getPositions').and.callThrough();
+  describe('ngOnInit method test suite', () => {
+    it('should call method getPositions correctly', () => {
+      spyOn(component, 'getPositions').and.callThrough().and.stub();
       component.ngOnInit();
       expect(component.getPositions).toHaveBeenCalled();
     });
   });
 
   describe('getPositions test suite', () => {
-    it('should call method getPositions catch error', inject([EmployeesService], () => {
-      // spyOn(toastrService, 'error').and.callThrough();
-      spyOn(employeesService, 'getEmployeesPositions').and.returnValue(Promise.reject('cant load position list'));
-      component.getPositions();  
-      // expect(toastrService.error).toHaveBeenCalled();    
-    }));
+    it('should call method getPositions correctly', async () => {
+      spyOn(employeesService, 'getEmployeesPositions').and.returnValue(Promise.resolve({
+        positions: ['full-stack developer']
+      }));
+      spyOn(component.form, 'setValue').and.callThrough();
+      component.getPositions();
+      fixture.whenStable().then(() => {
+        expect(component.positions.length).toBe(1);
+        expect(component.form.setValue).toHaveBeenCalled();
+        expect(component.flagLoading).toBe(false);
+      });
+    });
+  });
+
+  it('should call method getPositions catch error', async () => {
+    spyOn(toastrService, 'error').and.callThrough();
+    spyOn(employeesService, 'getEmployeesPositions').and.returnValue(Promise.reject('cant load position list'));
+    component.getPositions();
+    fixture.whenStable().then(() => {
+      expect(component.flagLoading).toBe(false);
+      expect(toastrService.error).toHaveBeenCalled();
+    });
   });
 });

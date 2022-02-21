@@ -8,8 +8,7 @@ import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-employees-dialog',
   templateUrl: './employees-dialog.component.html',
-  styleUrls: ['./employees-dialog.component.scss'],
-  providers: [EmployeesService]
+  styleUrls: ['./employees-dialog.component.scss']
 })
 export class EmployeesDialogComponent implements OnInit {
   flagLoading = true;
